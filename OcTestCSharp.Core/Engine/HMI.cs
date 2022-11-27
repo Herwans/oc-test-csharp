@@ -10,7 +10,10 @@ namespace OcTestCSharp.App.Engine
             Dice dice = new();
             Game game = new();
 
-            Console.WriteLine($"A l'attaque : points/vie {game.Hero.Points} / {game.Hero.HealthPoints}");
+            Console.WriteLine($"***************************");
+            Console.WriteLine($"Let's fight !");
+            Console.WriteLine($"Heath points : {game.Hero.HealthPoints}"); 
+            Console.WriteLine($"**********");
 
             while (game.Hero.HealthPoints> 0)
             {
@@ -19,15 +22,18 @@ namespace OcTestCSharp.App.Engine
                 switch (result)
                 {
                     case Result.Win:
-                        Console.Write($"Monster battu");
+                        Console.Write($"Monster beats !");
                         break;
                     case Result.Loose:
-                        Console.Write($"Combat perdu");
+                        Console.Write($"You loose...");
                         break;
                 }
 
-                Console.WriteLine($": points/vie {game.Hero.Points}/{game.Hero.HealthPoints}");
+                Console.WriteLine($"\t Health remaining : {game.Hero.HealthPoints} \t/ Wins : {game.Hero.Points}");
             }
+
+            Console.WriteLine($"The hero has fallen after {game.Hero.Points} wins... Be the gods protect us.");
+
         }
     }
 }

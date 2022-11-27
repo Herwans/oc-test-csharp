@@ -1,3 +1,4 @@
+using FluentAssertions;
 using OcTestCSharp.Core.Engine;
 
 namespace OcTestCSharp.Test.Core.Engine
@@ -14,9 +15,9 @@ namespace OcTestCSharp.Test.Core.Engine
             // Act
             Result result = game.Round(6, 1);
 
-            if (result != Result.Win) Assert.Fail();
-            if (game.Hero.Points != 1) Assert.Fail();
-            if (game.Hero.HealthPoints != 15) Assert.Fail();
+            result.Should().Be(Result.Win);
+            game.Hero.Points.Should().Be(1);
+            game.Hero.HealthPoints.Should().Be(15);
         }
 
         [TestMethod]
@@ -26,9 +27,9 @@ namespace OcTestCSharp.Test.Core.Engine
 
             Result result = game.Round(5, 5);
 
-            if (result != Result.Win) Assert.Fail();
-            if (game.Hero.Points != 1) Assert.Fail();
-            if (game.Hero.HealthPoints != 15) Assert.Fail();
+            result.Should().Be(Result.Win);
+            game.Hero.Points.Should().Be(1);
+            game.Hero.HealthPoints.Should().Be(15);
         }
 
         [TestMethod]
@@ -38,9 +39,9 @@ namespace OcTestCSharp.Test.Core.Engine
 
             Result result = game.Round(2, 4);
 
-            if (result != Result.Loose) Assert.Fail();
-            if (game.Hero.Points != 0) Assert.Fail();
-            if (game.Hero.HealthPoints != 13) Assert.Fail();
+            result.Should().Be(Result.Loose);
+            game.Hero.Points.Should().Be(0);
+            game.Hero.HealthPoints.Should().Be(13);
         }
     }
 }
