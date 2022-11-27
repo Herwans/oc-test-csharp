@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OcTestCSharp.Core.Model
+{
+    public class Hero
+    {
+
+        public int HealthPoint { get; private set; }
+        public int Points { get; private set; }
+
+        public Hero(int healthPoints)
+        {
+            HealthPoint = healthPoints;
+        }
+
+        public void WinFight()
+        {
+            Points++;
+        }
+
+        public void LooseFight(int nb)
+        {
+            HealthPoint -= nb;
+        }
+    }
+}
