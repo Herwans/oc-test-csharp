@@ -10,9 +10,9 @@ namespace OcTestCSharp.App.Engine
             Dice dice = new();
             Game game = new();
 
-            Console.WriteLine($"A l'attaque : points/vie {game.Hero.Points} / {game.Hero.HealthPoint}");
+            Console.WriteLine($"A l'attaque : points/vie {game.Hero.Points} / {game.Hero.HealthPoints}");
 
-            while (game.Hero.HealthPoint> 0)
+            while (game.Hero.HealthPoints> 0)
             {
                 Result result = game.Round(dice.Roll(), dice.Roll());
 
@@ -26,7 +26,7 @@ namespace OcTestCSharp.App.Engine
                         break;
                 }
 
-                Console.WriteLine($": points/vie {game.Hero.Points}/{game.Hero.HealthPoint}");
+                Console.WriteLine($": points/vie {game.Hero.Points}/{game.Hero.HealthPoints}");
             }
         }
     }

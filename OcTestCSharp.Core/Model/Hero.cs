@@ -9,12 +9,12 @@ namespace OcTestCSharp.Core.Model
     public class Hero
     {
 
-        public int HealthPoint { get; private set; }
+        public int HealthPoints { get; private set; }
         public int Points { get; private set; }
 
         public Hero(int healthPoints)
         {
-            HealthPoint = healthPoints;
+            HealthPoints = healthPoints;
         }
 
         public void WinFight()
@@ -24,7 +24,7 @@ namespace OcTestCSharp.Core.Model
 
         public void LooseFight(int nb)
         {
-            HealthPoint -= nb;
+            HealthPoints -= nb;
         }
     }
 }
