@@ -1,39 +1,49 @@
 ﻿using OcTestCSharp.Core.Engine;
-using OcTestCSharp.Core.Service;
+using OcTestCSharp.Core.Provider.Weather;
+using OcTestCSharp.Core.Service.Dice;
+using OcTestCSharp.Core.Service.InputOutput;
 
-namespace OcTestCSharp.App.Engine
+namespace OcTestCSharp.Core.Engine
 {
     public class HMI
     {
+        private readonly IOutput output;
+
+        private readonly IDice dice;
+        private readonly IWeather weather;
+
+        public HMI(IOutput output, IDice dice, IWeather weather)
+        {
+            this.output = output;
+            this.dice = dice;
+            this.weather = weather;
+        }
+
         public void Start()
         {
-            Dice dice = new();
-            Game game = new();
+            Game game = new(weather);
 
-            Console.WriteLine($"***************************");
-            Console.WriteLine($"Let's fight !");
-            Console.WriteLine($"Heath points : {game.Hero.HealthPoints}"); 
-            Console.WriteLine($"**********");
+            output.WriteLine($"Let's fight !");
 
-            while (game.Hero.HealthPoints> 0)
+            while (game.Hero.HealthPoints > 0)
             {
                 Result result = game.Round(dice.Roll(), dice.Roll());
 
                 switch (result)
                 {
                     case Result.Win:
-                        Console.Write($"Monster beats !");
+                        output.Write($"Monster beats !");
                         break;
+
                     case Result.Loose:
-                        Console.Write($"You loose...");
+                        output.Write($"You loose...");
                         break;
                 }
 
-                Console.WriteLine($"\t Health remaining : {game.Hero.HealthPoints} \t/ Wins : {game.Hero.Points}");
+                output.WriteLine($"\t Health remaining : {game.Hero.HealthPoints} \t/ Wins : {game.Hero.Points}");
             }
 
-            Console.WriteLine($"The hero has fallen after {game.Hero.Points} wins... Be the gods protect us.");
-
+            output.WriteLine($"The hero has fallen after {game.Hero.Points} wins... Be the gods protect us.");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using OcTestCSharp.Core.Model;
+using OcTestCSharp.Core.Provider.Weather;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,14 @@ namespace OcTestCSharp.Core.Engine
 
     public class Game
     {
+        private readonly IWeather weatherProvider;
+
         public Hero Hero { get; set; }
 
-        public Game()
+        public Game(IWeather weatherProvider)
         {
             Hero = new(15);
+            this.weatherProvider = weatherProvider;
         }
 
         public Result Round(int heroDice, int monsterDice)
@@ -30,7 +34,16 @@ namespace OcTestCSharp.Core.Engine
                 return Result.Win;
             }
 
-            Hero.LooseFight(monsterDice - heroDice);
+            Weather weather = weatherProvider.WhatWeather();
+
+            int damage = monsterDice - heroDice;
+
+            if (weather == Weather.Storm)
+            {
+                damage *= 2;
+            }
+
+            Hero.LooseFight(damage);
             return Result.Loose;
         }
 
